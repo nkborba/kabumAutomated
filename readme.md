@@ -4,14 +4,13 @@
 * Python 3
 * Lib uiautomator (pip install uiautomator)
 * PyTest (pip install pystest)
-* Celular Android com app Kabum
+* Install Kabum store app on your Android mobile phone
 
-## Como rodar os testes:
-1. Faça o download do arquivo kabum.py em alguma pasta da sua preferência.
-2. Abra um terminal e navegue através dele acesse essa a pasta onde o arquivo kabum.py está
-4. Plugue seu celular no USB
-3. Rode o comando pytest kabum.py
-4. Pronto os testes irão rodar e em breve você terá os resultados
+## How to run the Test Cases:
+1. Download the kabum.py file in any of your prefered directory
+2. Open a terminal inside the path where the kabum.py is
+3. Plug your mobile phone on a USB port
+4. Start the test cases running the command line 'pytest kabum.py'
 
-## Porque UiAutomator + Python?
-Gosto muito de Python e a forma como esse wrapper de UiAutomator foi portado para a linguagem me faz sentir muito confortavel em sua utilização, o setup é muito tranquilo e o entendimento do que se pode fazer com a linguagem e com o framework é bem rápido de se pegar.
+## Why UiAutomator + Python?
+Since I found Python I liked how it is easier to learn and to read, also the UiAutomator python wrapper makes me feel very confortable using it, the setup is easy and the understanding of what we can do is quickly learned thorugh the documentation.
