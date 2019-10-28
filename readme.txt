@@ -5,8 +5,11 @@ PyTest (pip install pystest)
 Celular Android com app Kabum
 
 Como rodar os testes:
-1. FaÁa o download do arquivo kabum.py em alguma pasta da sua preferÍncia.
-2. Abra um terminal e navegue atravÈs dele acesse essa a pasta onde o arquivo kabum.py est·
+1. Fa√ßa o download do arquivo kabum.py em alguma pasta da sua prefer√™ncia.
+2. Abra um terminal e navegue atrav√©s dele acesse essa a pasta onde o arquivo kabum.py est√°
 4. Plugue seu celular no USB
 3. Rode o comando pytest kabum.py
-4. Pronto os testes ir„o rodar e em breve vocÍ ter· os resultados
+4. Pronto os testes ir√£o rodar e em breve voc√™ ter√° os resultados
+
+Porque UiAutomator + Python?
+Gosto muito de Python e a forma como esse wrapper de UiAutomator foi portado para a linguagem me faz sentir muito confortavel em sua utiliza√ß√£o, o setup √© muito tranquilo e o entendimento do que se pode fazer com a linguagem e com o framework √© bem r√°pido de se pegar.
