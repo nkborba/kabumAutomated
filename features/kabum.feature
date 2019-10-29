@@ -32,4 +32,4 @@ Feature: Cart behavior
         When I open the cart
         When I count items inside the cart
         When I delete an item
-        Then there is feIr items in the cart
+        Then there is fewer items in the cart
