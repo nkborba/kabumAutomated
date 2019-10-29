@@ -1,21 +1,9 @@
 from uiautomator import device as d
 from subprocess import Popen as term
 from time import sleep
+import kabumData as kd
 
 resId = 'br.com.kabum.webviewapp:id/'
-
-cep = '13086-510'
-fakeName = 'Hire Nicholas'
-fakeCpf = '708.005.230-08'
-fakeBirthday = '28/04/1992'
-user = 'nbtests01@gmail.com'
-pwd = 'tester1234'
-
-#All credit card information was generated on https://www.4devs.com.br/gerador_de_numero_cartao_credito and are not real
-creditNumber = '5476 1402 7281 7022'
-creditDate = '28/21'
-creditCVV = '582'
-
 
 def openKabum():
     term('adb shell am start -n br.com.kabum.webviewapp/br.com.kabum.kabumstore.activity.SplashScreen', shell=True).wait()
@@ -34,8 +22,8 @@ def login():
     d(resourceId=resId+'mais').click()
     if d(resourceId=resId+'botao_entrar').exists == True:
         print('\nStarting Login')
-        d(resourceId=resId+'texto_login_email').set_text(user)
-        d(resourceId=resId+'texto_password').set_text(pwd)
+        d(resourceId=resId+'texto_login_email').set_text(kd.user)
+        d(resourceId=resId+'texto_password').set_text(kd.pwd)
         d(resourceId=resId+'botao_entrar').click()
         print('Login done')
     else:
@@ -73,7 +61,7 @@ def addCEP():
     print('\nInserting CEP')
     # Insert CEP
     if d(resourceId=resId+'edit_text_cep').exists == True:
-        d(resourceId=resId+'edit_text_cep').set_text(cep)
+        d(resourceId=resId+'edit_text_cep').set_text(kd.cep)
     else:
         sleep(2)        
         d(scrollable=True).scroll.to(resourceId=resId+'botao_finalizar_bottom')
@@ -89,17 +77,17 @@ def selectPayment(payType):
 def insertCardData():
     print('\nInsert CC info')
     sleep(2)
-    d(resourceId=resId+'texto_numero_cartao').set_text(creditNumber)
+    d(resourceId=resId+'texto_numero_cartao').set_text(kd.creditNumber)
     d.press.back()
-    d(resourceId=resId+'texto_nome_cartao').set_text(fakeName)
+    d(resourceId=resId+'texto_nome_cartao').set_text(kd.fakeName)
     d.press.back()
-    d(resourceId=resId+'texto_validade_cartao').set_text(creditDate)
+    d(resourceId=resId+'texto_validade_cartao').set_text(kd.creditDate)
     d.press.back()
-    d(resourceId=resId+'texto_codigo_cartao').set_text(creditCVV)
+    d(resourceId=resId+'texto_codigo_cartao').set_text(kd.creditCVV)
     d.press.back()
-    d(resourceId=resId+'texto_cpf_cartao').set_text(fakeCpf)
+    d(resourceId=resId+'texto_cpf_cartao').set_text(kd.fakeCpf)
     d.press.back()
-    d(resourceId=resId+'texto_nascimento_cartao').set_text(fakeBirthday)
+    d(resourceId=resId+'texto_nascimento_cartao').set_text(kd.fakeBirthday)
     d.press.back()
     d(scrollable=True).scroll.to(resourceId=resId+'botao_cartao')
     d(resourceId=resId+'botao_cartao').click()

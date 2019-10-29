@@ -2,9 +2,7 @@ from uiautomator import device as d
 from subprocess import Popen as term
 from time import sleep
 import kabumPage as kp
-
-product1 = 'SA400S37'
-product2 = 'YD1600BBAEBOX'
+import kabumData as kd
 
 def basicFluxCartWithLogin(product):
     """Open the app > Log in > Add product to the cart > Open the cart"""
@@ -34,7 +32,7 @@ def test_purchaseFlow():
     """
     kp.closeKabum()
     kp.cleanCache()
-    basicFluxCartWithLogin(product1)
+    basicFluxCartWithLogin(kd.product1)
     finishPurchase('credito')
     sleep(2)
     assert d(resourceId=kp.resId+'confirmacao_toolbar').exists == True
@@ -45,7 +43,7 @@ def test_purchaseFlow2():
     """
     kp.closeKabum()
     kp.cleanCache()
-    fluxCartWithTwoProducts(product1, product2)
+    fluxCartWithTwoProducts(kd.product1, kd.product2)
     thereIsTwo = d(resourceId=kp.resId+'texto_quantidade_produto', text='2').exists
     finishPurchase('credito')
     sleep(2)
@@ -59,7 +57,7 @@ def test_removerDoCarrinho():
     """
     kp.closeKabum()
     kp.cleanCache()
-    fluxCartWithTwoProducts(product1, product2)
+    fluxCartWithTwoProducts(kd.product1, kd.product2)
     #Count how many occurencies of remove is being displayed since it's linked to the product
     # it will return exactly the number of products we have in the cart
     total = d(resourceId=kp.resId+'botao_remover').count

@@ -11,49 +11,46 @@ def step_impl(context):
     kp.cleanCache()
     kp.openKabum()
 
-@when('we log in')
+@when('I log in')
 def step_impl(context):
     kp.login()
 
-@when('we add the product "{product}" to the cart')
-def step_impl(context, product):
-    kp.addProduct(product)
+@when('I add the product to the cart')
+def step_impl(context):
+    for row in context.table:
+        p = row['product']
+        kp.backToKabumHome()
+        kp.addProduct(p)
 
-@when('we open the cart')
+@when('I open the cart')
 def step_impl(context):
     kp.openCart()
 
-@when('we add CEP')
+@when('I add CEP')
 def step_impl(context):
     kp.addCEP()
 
-@when('we add select payment type as "{payType}"')
+@when('I add select payment type as "{payType}"')
 def step_impl(context, payType):
     kp.selectPayment(payType)
 
-@when('we insert credit card info')
+@when('I insert credit card info')
 def step_impl(context):
     kp.insertCardData()
 
-@when('we add another product "{product}" to the cart')
-def step_impl(context, product):
-    kp.backToKabumHome()
-    kp.addProduct(product)
-
-@when('we add an unit of the last product')
+@when('I add an unit of the last product')
 def step_impl(context):
-    sleep(3)
-    d(resourceId=kp.resId+'botao_aumentar_qtd', instance=1).click()
     sleep(5)
+    d(resourceId=kp.resId+'botao_aumentar_qtd', instance=1).click()
 
-@when('we count items inside the cart')
+@when('I count items inside the cart')
 def step_impl(context):
     sleep(5)
     global total
     total = d(resourceId=kp.resId+'botao_remover').count
     sleep(2)
 
-@when('we delete an item')
+@when('I delete an item')
 def step_impl(context):
     d(resourceId=kp.resId+'botao_remover', instance=0).click()
 
@@ -63,7 +60,7 @@ def step_impl(context):
     sleep(2)
     assert (num < total) == True
 
-@then('we finish the purchase')
+@then('I should finish the purchase sucessfully')
 def step_impl(context):
     sleep(3)
     assert d(resourceId=kp.resId+'confirmacao_toolbar').exists == True
