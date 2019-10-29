@@ -2,8 +2,10 @@ from uiautomator import device as d
 from subprocess import Popen as term
 from time import sleep
 
+resId = 'br.com.kabum.webviewapp:id/'
+
 cep = '13086-510'
-fakeName = 'Contrata o Nicholas'
+fakeName = 'Hire Nicholas'
 fakeCpf = '708.005.230-08'
 fakeBirthday = '28/04/1992'
 user = 'nbtests01@gmail.com'
@@ -15,112 +17,92 @@ creditDate = '28/21'
 creditCVV = '582'
 
 
-def abrirKabum():
+def openKabum():
     term('adb shell am start -n br.com.kabum.webviewapp/br.com.kabum.kabumstore.activity.SplashScreen', shell=True).wait()
     print('\nStarting app')
 
-def limparCache():
+def cleanCache():
     #Useful to clear the search history and the logged user to start a new scenario from state zero
     term('adb shell pm clear br.com.kabum.webviewapp', shell=True).wait()
     print('\nCache cleaned')
 
-def fecharKabum():
+def closeKabum():
     term('adb shell am force-stop br.com.kabum.webviewapp',shell=True).wait()
     print('\nClosing app')
 
-def fazerLogin():
-    # (openKabum(), 'soSegue')[d(packageName='br.com.kabum.webviewapp').exists]
-    d(resourceId='br.com.kabum.webviewapp:id/mais').click()
-    if d(resourceId='br.com.kabum.webviewapp:id/botao_entrar').exists == True:
+def login():
+    d(resourceId=resId+'mais').click()
+    if d(resourceId=resId+'botao_entrar').exists == True:
         print('\nStarting Login')
-        d(resourceId='br.com.kabum.webviewapp:id/texto_login_email').set_text(user)
-        d(resourceId='br.com.kabum.webviewapp:id/texto_password').set_text(pwd)
-        d(resourceId='br.com.kabum.webviewapp:id/botao_entrar').click()
+        d(resourceId=resId+'texto_login_email').set_text(user)
+        d(resourceId=resId+'texto_password').set_text(pwd)
+        d(resourceId=resId+'botao_entrar').click()
         print('Login done')
     else:
         print('\nAlready logged in')
         pass
 
-def pesquisaProduto(nomeProduto):
+def searchProduct(productName):
     print('\nSearching product')
 
-    if d(resourceId='br.com.kabum.webviewapp:id/search_menu').exists == False:
-        d(resourceId='br.com.kabum.webviewapp:id/searchWidget').click()
+    if d(resourceId=resId+'search_menu').exists == False:
+        d(resourceId=resId+'searchWidget').click()
     else:
-        d(resourceId='br.com.kabum.webviewapp:id/search_menu').click()
+        d(resourceId=resId+'search_menu').click()
 
-    d(resourceId='br.com.kabum.webviewapp:id/search_src_text').set_text(nomeProduto)
+    d(resourceId=resId+'search_src_text').set_text(productName)
     d.press.enter()
     sleep(3)
     print('Search finished')
 
-def adicionaProduto(nomeProduto):
-    pesquisaProduto(nomeProduto)
+def addProduct(productName):
+    searchProduct(productName)
     print('\nAdding product to the cart')
-    #Abre o produto
-    d(resourceId='br.com.kabum.webviewapp:id/card_view_favoritos')[0].click()
-    #Adiciona no carrinho
-    d(resourceId='br.com.kabum.webviewapp:id/floating_carrinho').click()
+    #Open product page
+    d(resourceId=resId+'card_view_favoritos')[0].click()
+    #Add product on the cart
+    d(resourceId=resId+'floating_carrinho').click()
     print('Product added')
 
-def abrirCarrinho():
+def openCart():
     print('\nOpening cart')
-    d(resourceId='br.com.kabum.webviewapp:id/carrinho_menu').click()
+    d(resourceId=resId+'carrinho_menu').click()
     print('Cart opened')
 
-def adicionaCEP():
+def addCEP():
     print('\nInserting CEP')
-    # Insere CEP
-    if d(resourceId='br.com.kabum.webviewapp:id/edit_text_cep').exists == True:
-        d(resourceId='br.com.kabum.webviewapp:id/edit_text_cep').set_text(cep)
+    # Insert CEP
+    if d(resourceId=resId+'edit_text_cep').exists == True:
+        d(resourceId=resId+'edit_text_cep').set_text(cep)
     else:        
-        d(scrollable=True).scroll.to(resourceId='br.com.kabum.webviewapp:id/botao_finalizar_bottom')
-        d(resourceId='br.com.kabum.webviewapp:id/botao_finalizar_bottom').click()
+        d(scrollable=True).scroll.to(resourceId=resId+'botao_finalizar_bottom')
+        d(resourceId=resId+'botao_finalizar_bottom').click()
     print('CEP inserted')
 
-def selecionaPagamento(forma):
-    if forma == 'credito':
+def selectPayment(payType):
+    if payType == 'credito':
         d(text='CARTÃO DE CRÉDITO').click()
-    elif forma == 'boleto':
+    elif payType == 'boleto':
         d(text='BOLETO BANCÁRIO').click()
 
-def inserirDadosCartao():
+def insertCardData():
     print('\nInsert CC info')
     sleep(2)
-    d(resourceId='br.com.kabum.webviewapp:id/texto_numero_cartao').set_text(creditNumber)
+    d(resourceId=resId+'texto_numero_cartao').set_text(creditNumber)
     d.press.back()
-    d(resourceId='br.com.kabum.webviewapp:id/texto_nome_cartao').set_text(fakeName)
+    d(resourceId=resId+'texto_nome_cartao').set_text(fakeName)
     d.press.back()
-    d(resourceId='br.com.kabum.webviewapp:id/texto_validade_cartao').set_text(creditDate)
+    d(resourceId=resId+'texto_validade_cartao').set_text(creditDate)
     d.press.back()
-    d(resourceId='br.com.kabum.webviewapp:id/texto_codigo_cartao').set_text(creditCVV)
+    d(resourceId=resId+'texto_codigo_cartao').set_text(creditCVV)
     d.press.back()
-    d(resourceId='br.com.kabum.webviewapp:id/texto_cpf_cartao').set_text(fakeCpf)
+    d(resourceId=resId+'texto_cpf_cartao').set_text(fakeCpf)
     d.press.back()
-    d(resourceId='br.com.kabum.webviewapp:id/texto_nascimento_cartao').set_text(fakeBirthday)
+    d(resourceId=resId+'texto_nascimento_cartao').set_text(fakeBirthday)
     d.press.back()
-    d(resourceId='br.com.kabum.webviewapp:id/botao_cartao').click()
+    d(resourceId=resId+'botao_cartao').click()
     print('Credid card info inserted')
 
-def voltarHomeKabum():
-    while d(resourceId='br.com.kabum.webviewapp:id/home').exists == False:
+def backToKabumHome():
+    while d(resourceId=resId+'home').exists == False:
         d.press.back()
-
-def fluxoBasicoCarrinhoComLogin(produto):
-    abrirKabum()
-    fazerLogin()
-    adicionaProduto(produto)
-    abrirCarrinho()
-
-def fluxoCarrinhoComDoisProdutos(produtoA, produtoB):
-    fluxoBasicoCarrinhoComLogin(produtoA)
-    voltarHomeKabum()
-    fluxoBasicoCarrinhoComLogin(produtoB)
-    sleep(3)
-    d(resourceId='br.com.kabum.webviewapp:id/botao_aumentar_qtd', instance=1).click()
-    sleep(5)
-
-def finalizarCompra(pagamento):
-    adicionaCEP()
-    selecionaPagamento(pagamento)
-    inserirDadosCartao()

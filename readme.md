@@ -7,8 +7,8 @@
 * Install Kabum store app on your Android mobile phone
 
 ## How to run the Test Cases:
-1. Download the kabum.py file in any of your prefered directory
-2. Open a terminal inside the path where the kabum.py is
+1. Clone the project in any directory of your computer
+2. Open a terminal inside the project folder
 3. Plug your mobile phone on a USB port
 4. Start the test cases running the command line 'pytest kabum.py'
 
