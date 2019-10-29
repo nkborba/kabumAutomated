@@ -59,7 +59,7 @@ def step_impl(context):
 def step_impl(context):
     d(resourceId=kp.resId+'botao_remover', instance=0).click()
 
-@then('there is fewer items in the cart')
+@then('I see fewer items in the cart')
 def step_impl(context):
     num = d(resourceId=kp.resId+'botao_remover').count
     sleep(2)

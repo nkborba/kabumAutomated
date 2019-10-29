@@ -14,7 +14,7 @@ Feature: Cart behavior
 
     Scenario: Purchase 2 items, one with 2 units
         Given the Kabum Store
-        And I log in
+        When I log in
         And I add the product to the cart
             |product        |
             |SA400S37       |
@@ -36,4 +36,4 @@ Feature: Cart behavior
         And I open the cart
         And I count items inside the cart
         And I delete an item
-        Then there is fewer items in the cart
+        Then I see fewer items in the cart
