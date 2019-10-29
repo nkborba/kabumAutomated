@@ -27,8 +27,10 @@ Feature: Cart behavior
     Scenario: Delete an item from the cart
         Given the Kabum Store
         When I log in
-        When I add the product "SA400S37" to the cart
-        When I add another product "YD1600BBAEBOX" to the cart
+        When I add the product to the cart
+            |product        |
+            |SA400S37       |
+            |YD1600BBAEBOX  |
         When I open the cart
         When I count items inside the cart
         When I delete an item
