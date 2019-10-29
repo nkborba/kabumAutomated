@@ -14,3 +14,11 @@
 
 ## Why UiAutomator + Python?
 Since I found Python I liked how it is easier to learn and to read, also the UiAutomator python wrapper makes me feel very confortable using it, the setup is easy and the understanding of what we can do is quickly learned thorugh the documentation.
+
+# Kabum Store Automation + BDD Gherkin
+
+Inside the folder features you'll find all files needed to run the test over BDD. For that please follow the instructions below:
+
+1. You'll need to install 'behave' for that use: ```pip install behave```
+2. Clone the project to any directory of your preference
+3. Inside the folder 'features' run this command line: ```behave``` (yes, only that, if the setup was done correclty it will run the three test cases)
