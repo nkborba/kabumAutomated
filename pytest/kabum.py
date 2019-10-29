@@ -1,8 +1,13 @@
+import sys
+
+#Register the Modules folder
+sys.path.insert(1, '../../kabumAutomated/')
+
 from uiautomator import device as d
 from subprocess import Popen as term
 from time import sleep
-import kabumPage as kp
-import kabumData as kd
+import Modules.kabumPage as kp
+import Modules.kabumData as kd
 
 def basicFluxCartWithLogin(product):
     """Open the app > Log in > Add product to the cart > Open the cart"""

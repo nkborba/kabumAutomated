@@ -1,7 +1,7 @@
 from uiautomator import device as d
 from subprocess import Popen as term
 from time import sleep
-import kabumData as kd
+from Modules import kabumData as kd
 
 resId = 'br.com.kabum.webviewapp:id/'
 

@@ -1,6 +1,11 @@
+import sys
+
+#Register the Modules folder
+sys.path.insert(1, '../../../kabumAutomated/')
+
 from behave import *
 from uiautomator import device as d
-import kabumPage as kp
+from Modules import kabumPage as kp
 from time import sleep
 
 total = 0
