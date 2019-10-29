@@ -1,8 +1,3 @@
-import sys
-
-#Register the Modules folder
-sys.path.insert(1, '../../../kabumAutomated/')
-
 from behave import *
 from uiautomator import device as d
 from Modules import kabumPage as kp
