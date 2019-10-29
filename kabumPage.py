@@ -74,7 +74,8 @@ def addCEP():
     # Insert CEP
     if d(resourceId=resId+'edit_text_cep').exists == True:
         d(resourceId=resId+'edit_text_cep').set_text(cep)
-    else:        
+    else:
+        sleep(2)        
         d(scrollable=True).scroll.to(resourceId=resId+'botao_finalizar_bottom')
         d(resourceId=resId+'botao_finalizar_bottom').click()
     print('CEP inserted')
@@ -100,6 +101,7 @@ def insertCardData():
     d.press.back()
     d(resourceId=resId+'texto_nascimento_cartao').set_text(fakeBirthday)
     d.press.back()
+    d(scrollable=True).scroll.to(resourceId=resId+'botao_cartao')
     d(resourceId=resId+'botao_cartao').click()
     print('Credid card info inserted')
 
