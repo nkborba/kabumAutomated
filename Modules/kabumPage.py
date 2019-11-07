@@ -3,7 +3,11 @@ from subprocess import Popen as term
 from time import sleep
 from Modules import kabumData as kd
 
+#Main Activity
 resId = 'br.com.kabum.webviewapp:id/'
+
+#ImplicityWait
+waitLimit = 5000
 
 def openKabum():
     term('adb shell am start -n br.com.kabum.webviewapp/br.com.kabum.kabumstore.activity.SplashScreen', shell=True).wait()
@@ -38,9 +42,10 @@ def searchProduct(productName):
     else:
         d(resourceId=resId+'search_menu').click()
 
+    d(resourceId=resId+'search_src_text').wait.exists(timeout=waitLimit)
     d(resourceId=resId+'search_src_text').set_text(productName)
     d.press.enter()
-    sleep(3)
+    d.wait.idle()
     print('Search finished')
 
 def addProduct(productName):
@@ -62,8 +67,12 @@ def addCEP():
     # Insert CEP
     if d(resourceId=resId+'edit_text_cep').exists == True:
         d(resourceId=resId+'edit_text_cep').set_text(kd.cep)
+        d.wait.idle()       
+        d(scrollable=True).scroll.to(resourceId=resId+'botao_finalizar_bottom')
+        d(resourceId=resId+'botao_finalizar_bottom').click()
     else:
-        sleep(2)        
+        # sleep(2)
+        d.wait.update()       
         d(scrollable=True).scroll.to(resourceId=resId+'botao_finalizar_bottom')
         d(resourceId=resId+'botao_finalizar_bottom').click()
     print('CEP inserted')
@@ -94,5 +103,6 @@ def insertCardData():
     print('Credit card info inserted')
 
 def backToKabumHome():
-    while d(resourceId=resId+'home').exists == False:
+    while d(resourceId=resId+'bb_bottom_bar_item_container').exists == False:
+        print("Pressed back")
         d.press.back()

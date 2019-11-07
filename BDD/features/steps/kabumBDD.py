@@ -40,15 +40,16 @@ def step_impl(context):
 
 @when('I add an unit of the last product')
 def step_impl(context):
-    sleep(5)
+    # sleep(5)
+    d(resourceId=kp.resId+'botao_aumentar_qtd', instance=1).wait.exists(timeout=kp.waitLimit)
     d(resourceId=kp.resId+'botao_aumentar_qtd', instance=1).click()
 
 @when('I count items inside the cart')
 def step_impl(context):
-    sleep(5)
     global total
+    d.wait.update()
     total = d(resourceId=kp.resId+'botao_remover').count
-    sleep(2)
+    # sleep(2)
 
 @when('I delete an item')
 def step_impl(context):
@@ -56,12 +57,13 @@ def step_impl(context):
 
 @then('I see fewer items in the cart')
 def step_impl(context):
+    d.wait.update()
     num = d(resourceId=kp.resId+'botao_remover').count
-    sleep(2)
+    print("num = "+str(num)+"< total = "+str(total))
     assert (num < total) == True
 
 @then('I should finish the purchase sucessfully')
 def step_impl(context):
-    sleep(3)
+    d(resourceId=kp.resId+'confirmacao_toolbar').wait.exists(timeout=kp.waitLimit)
     assert d(resourceId=kp.resId+'confirmacao_toolbar').exists == True
-    sleep(3)
+    # sleep(3)
